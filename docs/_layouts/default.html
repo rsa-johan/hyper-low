@@ -4,17 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title | default: "hyper_low" }}</title>
-  <script>
-    // Runs before paint so the saved theme is applied without a flash.
-    (function () {
-      var t = null;
-      try { t = localStorage.getItem("theme"); } catch (e) {}
-      if (t !== "light" && t !== "dark") {
-        t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      }
-      document.documentElement.setAttribute("data-theme", t);
-    })();
-  </script>
+  <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
 </head>
 <body>
@@ -33,24 +23,5 @@
   <main class="content">
     {{ content }}
   </main>
-
-  <script>
-    (function () {
-      var root = document.documentElement;
-      var btn = document.getElementById("theme-toggle");
-      function label() {
-        var dark = root.getAttribute("data-theme") === "dark";
-        btn.textContent = dark ? "\u2600 Light" : "\u263E Dark";
-        btn.setAttribute("aria-pressed", dark ? "true" : "false");
-      }
-      btn.addEventListener("click", function () {
-        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        root.setAttribute("data-theme", next);
-        try { localStorage.setItem("theme", next); } catch (e) {}
-        label();
-      });
-      label();
-    })();
-  </script>
 </body>
 </html>

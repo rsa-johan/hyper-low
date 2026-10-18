@@ -1,0 +1,8 @@
+title: hyper_low
+
+# Guide pages have no front matter (they are also included by rustdoc), so set the layout here.
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
