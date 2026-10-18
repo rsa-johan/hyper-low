@@ -1,0 +1,15 @@
+
+
+
+#[derive(Debug, Default)]
+struct StructName {
+    pub field1: bool,
+    pub field2: bool,
+}
+
+impl StructName {
+    pub fn parse(can_frame: u8) {
+        let field1 = ((can_frame & 0xF0) >> 4) != 0;
+        let field2 = (can_frame & 0x0F) != 0;
+    }
+}

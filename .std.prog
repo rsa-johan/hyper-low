@@ -1,0 +1,16 @@
+glossary:
+    - abbreviations:
+        1. single_char = s
+        2. abbreviation = abbr
+
+# ===
+Parameter names::
+    1. s_abbr
+
+List of commmons::
+    - abbr:
+        1. dir = directory
+    - s:
+        1. p = proto
+        2. c = check
+## ===

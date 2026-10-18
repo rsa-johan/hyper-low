@@ -1,0 +1,28 @@
+[package]
+name = "can-proto"
+version = "0.1.0"
+edition = "2024"
+description = "Compiler for `.cp` CAN definitions: generates Rust modules and C99 headers with typed payloads, encoders/decoders and acceptance filters."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rsa-johan/can-proto"
+homepage = "https://rsa-johan.github.io/can-proto/"
+documentation = "https://rsa-johan.github.io/can-proto/"
+readme = "README.md"
+keywords = ["can", "codegen", "embedded", "protocol", "compiler"]
+categories = ["embedded", "encoding", "development-tools", "command-line-utilities"]
+publish = false
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "proto_c"
+path = "src/main.rs"
+
+[features]
+debug = []
+default = ["debug"]
+
+[dependencies]
+strum = "0.28.0"
+strum_macros = "0.28.0"
