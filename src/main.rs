@@ -1,11 +1,11 @@
 use std::{fs, path::{Path, PathBuf}, process::ExitCode};
 
-use can_proto::{compile, ErrorSignals, Generated, Output};
+use hyper_low::{compile, ErrorSignals, Generated, Output};
 
 const USAGE: &str = "\
 Compile CAN proto (.cp) definitions into Rust modules and C headers.
 
-Usage: proto_c [OPTIONS] <INPUT>...
+Usage: hyper_low [OPTIONS] <INPUT>...
 
 Arguments:
   <INPUT>...           a directory is compiled as a package: <name>/mod.rs plus one

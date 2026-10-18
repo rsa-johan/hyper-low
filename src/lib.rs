@@ -1,10 +1,10 @@
-//! Compiler for `.cp` CAN definitions.
+//! Compiler for `.cp` definitions of low-level protocols. CAN is currently supported.
 //!
-//! A `.cp` file describes CAN payload layouts, acceptance filters and request/response functions.
-//! `can-proto` turns it into a dependency-free Rust module and a C99 header with typed payload structs,
+//! A `.cp` file describes payload layouts, acceptance filters and request/response functions.
+//! `hyper_low` turns it into a dependency-free Rust module and a C99 header with typed payload structs,
 //! encoders/decoders, filter constants for hardware acceptance filters, and response matchers.
 //!
-//! It can be used through the `proto_c` command-line tool ([`guide::cli`]) or as a library, for
+//! It can be used through the `hyper_low` command-line tool ([`guide::cli`]) or as a library, for
 //! example from `build.rs`.
 //!
 //! # Example
@@ -23,10 +23,10 @@
 //! .filter Node(2)
 //! .Status
 //! ";
-//! let generated = can_proto::compile_str(src, "heartbeat", "heartbeat.cp")?;
+//! let generated = hyper_low::compile_str(src, "heartbeat", "heartbeat.cp")?;
 //! assert!(generated.rust.contains("pub struct Heartbeat"));
 //! assert!(generated.c.contains("Heartbeat_encode"));
-//! # Ok::<(), can_proto::ErrorSignals>(())
+//! # Ok::<(), hyper_low::ErrorSignals>(())
 //! ```
 //!
 //! # Guide
@@ -123,7 +123,7 @@ pub enum Output {
 /// # Example
 ///
 /// ```no_run
-/// use can_proto::{compile, Output};
+/// use hyper_low::{compile, Output};
 ///
 /// match compile("protos/examples".as_ref())? {
 ///     Output::Package(pkg) => {
@@ -133,7 +133,7 @@ pub enum Output {
 ///     }
 ///     Output::File { module, generated } => println!("{module}: {} bytes of C", generated.c.len()),
 /// }
-/// # Ok::<(), can_proto::ErrorSignals>(())
+/// # Ok::<(), hyper_low::ErrorSignals>(())
 /// ```
 pub fn compile(path: &Path) -> Result<Output> {
     let inputs = init::load(path)?;
@@ -181,8 +181,8 @@ pub fn compile_file(path: &Path) -> Result<Generated> {
 /// # Example
 ///
 /// ```
-/// let err = can_proto::compile_str("def {0} A:\n.x 0\n", "t", "t.cp").unwrap_err();
-/// assert!(matches!(err, can_proto::ErrorSignals::At { line: 2, .. }));
+/// let err = hyper_low::compile_str("def {0} A:\n.x 0\n", "t", "t.cp").unwrap_err();
+/// assert!(matches!(err, hyper_low::ErrorSignals::At { line: 2, .. }));
 /// ```
 pub fn compile_str(src: &str, unit: &str, source: &str) -> Result<Generated> {
     let proto = parse(src)?;

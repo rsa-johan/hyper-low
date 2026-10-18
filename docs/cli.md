@@ -1,7 +1,7 @@
-Command-line usage of the `proto_c` binary.
+Command-line usage of the `hyper_low` binary.
 
 ```text
-Usage: proto_c [OPTIONS] <INPUT>...
+Usage: hyper_low [OPTIONS] <INPUT>...
 
 Arguments:
   <INPUT>...           a directory is compiled as a package: <name>/mod.rs plus one
@@ -20,12 +20,12 @@ Options:
 # Examples
 
 ```sh
-cargo install --git https://github.com/rsa-johan/can-proto   # installs `proto_c`
+cargo install --git https://github.com/rsa-johan/hyper-low   # installs `hyper_low`
 
-proto_c protos/examples -o generated          # package -> generated/{rust,c}/examples/
-proto_c protos/examples/dummy.cp -o generated # one self-contained file (includes inlined)
-proto_c --check protos/examples               # validate only
-proto_c --lang c --c-out firmware/inc protos/examples
+hyper_low protos/examples -o generated          # package -> generated/{rust,c}/examples/
+hyper_low protos/examples/dummy.cp -o generated # one self-contained file (includes inlined)
+hyper_low --check protos/examples               # validate only
+hyper_low --lang c --c-out firmware/inc protos/examples
 ```
 
 Several inputs can be given at once; each is compiled independently. Inputs whose header is `#ignore=` are skipped. The exit code is non-zero if any input fails, and every error is printed with its file and line.

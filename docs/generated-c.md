@@ -4,7 +4,7 @@ Headers contain only types, macros and `static inline` functions, so no `.c` fil
 
 # Layout
 
-- **Package** (directory input): one `<pkg>/<module>.h` per file. A header `#include`s the headers of its `#inc=` files by plain name (`#include "common_inc.h"`), so keep a package's headers together in one directory. Include guards are `PROTO_C_<PKG>_<MODULE>_H`.
+- **Package** (directory input): one `<pkg>/<module>.h` per file. A header `#include`s the headers of its `#inc=` files by plain name (`#include "common_inc.h"`), so keep a package's headers together in one directory. Include guards are `HYPER_LOW_<PKG>_<MODULE>_H`.
 - **Single file**: one self-contained header with all included items inlined.
 
 ```c
@@ -17,9 +17,9 @@ Every `*_encode*`/`*_decode*` function returns `int`:
 
 | Macro | Value | Meaning |
 |---|---|---|
-| `PROTO_C_OK` | `0` | success |
-| `PROTO_C_ERR_SHORT_BUFFER` | `-1` | `len` is shorter than the layout requires |
-| `PROTO_C_ERR_INVALID_ENUM` | `-2` | a field holds a value that is not a variant of its enum |
+| `HYPER_LOW_OK` | `0` | success |
+| `HYPER_LOW_ERR_SHORT_BUFFER` | `-1` | `len` is shorter than the layout requires |
+| `HYPER_LOW_ERR_INVALID_ENUM` | `-2` | a field holds a value that is not a variant of its enum |
 
 # Items per construct
 
@@ -100,7 +100,7 @@ SetFanSpeedRequest_encode(&req, buf, sizeof buf);   /* send with your id */
 
 TemperatureError temp;
 if (GetTemperature_is_response(id, extended, data, len)
-    && GetTemperature_decode_response(&temp, data, len) == PROTO_C_OK) {
+    && GetTemperature_decode_response(&temp, data, len) == HYPER_LOW_OK) {
     /* use temp */
 }
 ```

@@ -7,7 +7,7 @@ The output has no dependencies and only uses `core`, so it works in `no_std` cra
 - **Package** (directory input): `<pkg>/mod.rs` holds the shared prelude and one `pub mod` per file. Each module starts with `use super::*;` and `use super::<include>::*;` for its `#inc=` files, so included items are shared, not duplicated.
 - **Single file**: one self-contained `.rs` file with the prelude and all included items inlined.
 
-Using a package that was written into the source tree (for example with `proto_c protos/examples -o src/proto --lang rust`):
+Using a package that was written into the source tree (for example with `hyper_low protos/examples -o src/proto --lang rust`):
 
 ```rust,ignore
 #[path = "proto/rust/examples/mod.rs"]
@@ -19,10 +19,10 @@ use examples::dummy::*;
 A single file can also be generated into `OUT_DIR` from `build.rs` and pulled in with `include!`:
 
 ```rust,ignore
-// build.rs (needs `can-proto` as a build-dependency)
+// build.rs (needs `hyper_low` as a build-dependency)
 fn main() {
     println!("cargo::rerun-if-changed=protos");
-    let g = can_proto::compile_file("protos/dummy.cp".as_ref()).unwrap();
+    let g = hyper_low::compile_file("protos/dummy.cp".as_ref()).unwrap();
     let out = std::path::PathBuf::from(std::env::var("OUT_DIR").unwrap());
     std::fs::write(out.join("dummy.rs"), g.rust).unwrap();
 }

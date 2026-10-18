@@ -1,8 +1,8 @@
-# can-proto
+# hyper_low
 
-Compiler for `.cp` CAN definitions. Generates Rust modules and C99 headers with typed payload structs, encode/decode functions, acceptance filters and RPC-style request/response helpers.
+Compiler for `.cp` definitions of low-level protocols, aiming to be one common definition format across them. CAN is currently supported. Generates Rust modules and C99 headers with typed payload structs, encode/decode functions, acceptance filters and RPC-style request/response helpers.
 
-**Documentation:** <https://rsa-johan.github.io/can-proto/> (language reference, generated-code reference, CLI and library API). Build it locally with `cargo doc --no-deps --open`.
+**Documentation:** <https://rsa-johan.github.io/hyper-low/> (language reference, generated-code reference, CLI and library API). Build it locally with `cargo doc --no-deps --open`.
 
 ## Usage
 
@@ -18,7 +18,7 @@ A directory is compiled as a **package**. `x.cp` becomes module/header `x` and `
 - **Rust:** `mod examples;`
 - **C:** `#include "examples/dummy.h"`. Headers use only `static inline` functions, so no `.c` file is needed.
 
-The compiler is also a library for use from `build.rs` or a proc-macro. `can_proto::compile(path)` takes a directory or a file and returns `Output::Package` or `Output::File`. `compile_package`, `compile_file` and `compile_str` are narrower variants.
+The compiler is also a library for use from `build.rs` or a proc-macro. `hyper_low::compile(path)` takes a directory or a file and returns `Output::Package` or `Output::File`. `compile_package`, `compile_file` and `compile_str` are narrower variants.
 
 ## Example
 
@@ -38,7 +38,7 @@ fn GetTemperature(): TemperatureError
 .rsp Node(spec.node_id) | Kind(GetResponse) | Method(1)
 ```
 
-See [`protos/examples`](protos/examples) for a complete package and the [language reference](https://rsa-johan.github.io/can-proto/can_proto/guide/language/index.html) for the full syntax.
+See [`protos/examples`](protos/examples) for a complete package and the [language reference](https://rsa-johan.github.io/hyper-low/hyper_low/guide/language/index.html) for the full syntax.
 
 ## License
 
