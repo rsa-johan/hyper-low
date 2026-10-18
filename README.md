@@ -1,4 +1,4 @@
-# hyper_low
+# hyper_low (Unstable)
 
 Compiler for `.cp` definitions of low-level protocols, aiming to be one common definition format across them. CAN is currently supported. Generates Rust modules and C99 headers with typed payload structs, encode/decode functions, acceptance filters and RPC-style request/response helpers.
 
