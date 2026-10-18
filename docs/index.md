@@ -1,5 +1,5 @@
 ---
-title: hyper_low
+title: Hyper_Low
 ---
 
 # hyper_low

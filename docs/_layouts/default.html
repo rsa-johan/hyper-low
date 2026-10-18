@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: "hyper_low" }}</title>
+  <script>
+    // Runs before paint so the saved theme is applied without a flash.
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("theme"); } catch (e) {}
+      if (t !== "light" && t !== "dark") {
+        t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="{{ '/' | relative_url }}">hyper_low</a>
+    <nav>
+      <a href="{{ '/language.html' | relative_url }}">Language</a>
+      <a href="{{ '/generated-rust.html' | relative_url }}">Rust</a>
+      <a href="{{ '/generated-c.html' | relative_url }}">C</a>
+      <a href="{{ '/cli.html' | relative_url }}">CLI</a>
+      <a href="https://github.com/rsa-johan/hyper-low">GitHub</a>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle dark mode"></button>
+  </header>
+
+  <main class="content">
+    {{ content }}
+  </main>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById("theme-toggle");
+      function label() {
+        var dark = root.getAttribute("data-theme") === "dark";
+        btn.textContent = dark ? "\u2600 Light" : "\u263E Dark";
+        btn.setAttribute("aria-pressed", dark ? "true" : "false");
+      }
+      btn.addEventListener("click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        try { localStorage.setItem("theme", next); } catch (e) {}
+        label();
+      });
+      label();
+    })();
+  </script>
+</body>
+</html>
